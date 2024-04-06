@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Button } from './components/ui/button';
+import  Mike from './components/ui/Mike';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -64,6 +65,7 @@ function App() {
 
   return (
     <>
+      <Mike></Mike>
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1">
           <AccordionTrigger>How to check server content</AccordionTrigger>
