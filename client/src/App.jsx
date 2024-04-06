@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Button } from './components/ui/button';
-import  Mike from './components/ui/Mike';
+import  SimpleMike from './components/ui/Mike';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,14 +12,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from "./components/ui/alert-dialog";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+} from "./components/ui/accordion";
+import { Alert, AlertDescription, AlertTitle } from "./components/ui/alert"
 
 function App() {
   const [count, setCount] = useState(0);
@@ -65,7 +65,9 @@ function App() {
 
   return (
     <>
-      <Mike></Mike>
+      <SimpleMike job="developer" name="Cecconello">
+        Hello from children
+      </SimpleMike>
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1">
           <AccordionTrigger>How to check server content</AccordionTrigger>
