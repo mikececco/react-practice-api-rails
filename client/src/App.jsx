@@ -43,6 +43,23 @@ import {
   TableRow,
 } from "./components/ui/table";
 
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+// import ToggleButton from '@mui/material/ToggleButton';
+// import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+// import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
+import AppAppBar from './components/AppAppBar';
+import Hero from './components/Hero';
+import LogoCollection from './components/LogoCollection';
+import Highlights from './components/Highlights';
+import Pricing from './components/Pricing';
+import Features from './components/Features';
+import Testimonials from './components/Testimonials';
+import FAQ from './components/FAQ';
+import Footer from './components/Footer';
+
 
 function App() {
   const [count, setCount] = useState(0);
@@ -100,9 +117,22 @@ function App() {
     setShowTable(true);
   };
 
+  const [mode, setMode] = React.useState('light');
+  const [showCustomTheme, setShowCustomTheme] = React.useState(true);
+  // const LPtheme = createTheme(getLPTheme(mode));
+  const defaultTheme = createTheme({ palette: { mode } });
+
+  const toggleColorMode = () => {
+    setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
+  const toggleCustomTheme = () => {
+    setShowCustomTheme((prev) => !prev);
+  };
+
   return (
     <>
-      <SimpleMike job="developer" name="Cecconello">
+      {/* <SimpleMike job="developer" name="Cecconello">
         Hello from children
       </SimpleMike>
 
@@ -130,7 +160,7 @@ function App() {
 
 
 
-      {/* <Form className="space-y-8">
+      <Form className="space-y-8">
         <FormField
           control={control}
           name="username"
@@ -149,12 +179,12 @@ function App() {
           )}
         />
         <Button type="submit">Submit</Button>
-      </Form> */}
+      </Form>
 
 
-      {/* <ProfileForm /> */}
+      <ProfileForm />
 
-      {/* {rootInformationContacts} */}
+      {rootInformationContacts}
 
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1">
@@ -196,8 +226,31 @@ function App() {
             Check new status.
           </AlertDescription>
         </Alert>
-      )}
-    </>
+      )} */}
+    <ThemeProvider theme={defaultTheme}>
+      <CssBaseline />
+      <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
+      <Hero />
+      <Box sx={{ bgcolor: 'background.default' }}>
+        <LogoCollection />
+        <Features />
+        <Divider />
+        <Testimonials />
+        <Divider />
+        <Highlights />
+        <Divider />
+        <Pricing />
+        <Divider />
+        <FAQ />
+        <Divider />
+        <Footer />
+      </Box>
+      {/* <ToggleCustomTheme
+        showCustomTheme={showCustomTheme}
+        toggleCustomTheme={toggleCustomTheme}
+        /> */}
+    </ThemeProvider>
+  </>
   );
 }
 
