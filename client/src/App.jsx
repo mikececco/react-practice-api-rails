@@ -2,6 +2,18 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Button } from './components/ui/button';
 import  SimpleMike from './components/ui/Mike';
+import { useForm } from "react-hook-form";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "./components/ui/form";
+import { Input } from "./components/ui/input";
+import  ProfileForm from './components/ui/FormMike';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,7 +31,18 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "./components/ui/accordion";
-import { Alert, AlertDescription, AlertTitle } from "./components/ui/alert"
+import { Alert, AlertDescription, AlertTitle } from "./components/ui/alert";
+import ButtonUsage from "./components/ui/ButtonMUI";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./components/ui/table";
+
 
 function App() {
   const [count, setCount] = useState(0);
@@ -63,11 +86,76 @@ function App() {
     setCount(count + 1); // Increment count
   };
 
+  // const rootInformationContacts = responseCode.map((contact, index) => {
+  //   return <Contact key={index} contact={contact} />
+  // });
+
+  const { handleSubmit, control } = useForm();
+
+  const [formDataList, setFormDataList] = useState([]);
+  const [showTable, setShowTable] = useState(false);
+
+  const handleFormSubmit = (data) => {
+    setFormDataList([...formDataList, data]);
+    setShowTable(true);
+  };
+
   return (
     <>
       <SimpleMike job="developer" name="Cecconello">
         Hello from children
       </SimpleMike>
+
+      <ButtonUsage onSubmit={handleFormSubmit}/>
+
+      {showTable && (
+        <Table>
+        <TableCaption>A list of your recent invoices.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px]">Date</TableHead>
+            <TableHead className="text-right">Something</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {formDataList.map((data, index) => (
+              <TableRow key={index}>
+                <TableCell className="font-medium">Today</TableCell>
+                <TableCell className="text-right">{data.something}</TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      </Table>
+      )}
+
+
+
+      {/* <Form className="space-y-8">
+        <FormField
+          control={control}
+          name="username"
+
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input placeholder="shadcn" {...field} />
+              </FormControl>
+              <FormDescription>
+                This is your public display name.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">Submit</Button>
+      </Form> */}
+
+
+      {/* <ProfileForm /> */}
+
+      {/* {rootInformationContacts} */}
+
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1">
           <AccordionTrigger>How to check server content</AccordionTrigger>
